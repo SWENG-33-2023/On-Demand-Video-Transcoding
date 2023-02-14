@@ -1,4 +1,4 @@
 FROM python:3.8
 WORKDIR /app
-COPY . .
+ADD back-end .
 RUN pip install -r requirements.txt
