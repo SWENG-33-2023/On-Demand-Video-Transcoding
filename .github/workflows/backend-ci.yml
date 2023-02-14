@@ -25,7 +25,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: back-end/
-          file: Dockerfile
+          file: ./back-end/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_REPO_BACKEND}}
