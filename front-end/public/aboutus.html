@@ -11,35 +11,91 @@
             function nameClick(id) {
               switch(id) {
                 case "rehann":
-                    document.getElementById("studentName").innerHTML = "Rehann Viswanathan";
+                    name = "Rehann Viswanathan";
+                    year = "2";
+                    course = "ICS";
+                    contributions = "Back End";
+                    hobbies = "anime, table tennis";
+                    motto = "Seek Discomfort";
                     break;
                 case "stephen":
-                    document.getElementById("studentName").innerHTML = "Stephen Day";
+                    name = "Stephen Day";
+                    year = "3";
+                    course = "ICS";
+                    contributions.innerHTML = "";
+                    hobbies = "Basketball, TV";
+                    motto = "Hurray";
                     break;
                 case "alexander":
-                    document.getElementById("studentName").innerHTML = "Alexander Sepelenco";
+                    name = "Alexander Sepelenco";
+                    year = "3";
+                    course = "ICS";
+                    contributions = "Team leader, organization";
+                    hobbies = "Coding";
+                    motto = "ShutterStock stocks  y|_/^";
                     break;
                 case "ali":
-                    document.getElementById("studentName").innerHTML = "Al-Ani Ali";
+                    name = "Al-Ani Ali";
+                    year = "3rd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
                     break;
                 case "kate":
-                    document.getElementById("studentName").innerHTML = "Rehann Viswanathan";
+                    name = "Kate O'Neill";
+                    year = "2nd year";
+                    course = "ICS";
+                    contributions = "TBD";
+                    hobbies = "knitting";
+                    motto = "Real eyes, realise, real lies.";
                     break;
                 case "shahina":
-                    document.getElementById("studentName").innerHTML = "Shohinabonu Shamshodova";
+                    name = "Shohinabonu Shamshodova";
+                    year = "3rd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
                     break;
                 case "fionn":
-                    document.getElementById("studentName").innerHTML = "Fionn Camacho Lenihan";
+                    name = "Fionn Camacho Lenihan";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
                     break;
                 case "shaurya":
-                    document.getElementById("studentName").innerHTML = "Shaurya Varma";
+                    name = "Shaurya Varma";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
                     break;
                 case "nalin":
-                    document.getElementById("studentName").innerHTML = "Nalin Verma";
+                    name = "Nalin Verma";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
                     break;
                 case "yuxin":
-                    document.getElementById("studentName").innerHTML = "Yuxin Wan";
+                    name = "Yuxin Wan";
+                    year = "2nd year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
               }
+            document.getElementById("name").innerHTML = "Name: " + name;
+            document.getElementById("year").innerHTML = "Year: " + year;
+            document.getElementById("course").innerHTML = "Course: " + course;
+            document.getElementById("contributions").innerHTML = "Main contributions: " + contributions;
+            document.getElementById("hobbies").innerHTML = "Hobbies: " + hobbies;
+            document.getElementById("motto").innerHTML = "Motto: " + motto;
             }
             </script>
     </head>
@@ -99,16 +155,22 @@
                 </section>
                 <aside>
                     <div>
-                        <h2>Name:<p id="studentName"></p></h2>
+                        <h2 id="name"></h2>
                     </div>
                     <div>
-                        <h2>Experience:<p id="experience"></p></h2>
+                        <h2 id="year"></h2>
                     </div>
                     <div>
-                        <h2>Hobbies:<p id="hobbies"></p></h2>
+                        <h2 id="course"></h2>
                     </div>
                     <div>
-                        <h2>Motto:<p id="motto"></p></h2>
+                        <h2 id="contributions">click on a name to find out more</h2>
+                    </div>
+                    <div>
+                        <h2 id="hobbies"></h2>
+                    </div>
+                    <div>
+                        <h2 id="motto"></h2>
                     </div>
                 </aside>
             </main>
