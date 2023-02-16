@@ -7,8 +7,41 @@
         <title>On Demand Video Transcoding</title>
         <link rel="stylesheet" href="aboutus.css">
         <link rel="stylesheet" href="styles.css">
-        
-        
+        <script>
+            function nameClick(id) {
+              switch(id) {
+                case "rehann":
+                    document.getElementById("studentName").innerHTML = "Rehann Viswanathan";
+                    break;
+                case "stephen":
+                    document.getElementById("studentName").innerHTML = "Stephen Day";
+                    break;
+                case "alexander":
+                    document.getElementById("studentName").innerHTML = "Alexander Sepelenco";
+                    break;
+                case "ali":
+                    document.getElementById("studentName").innerHTML = "Al-Ani Ali";
+                    break;
+                case "kate":
+                    document.getElementById("studentName").innerHTML = "Rehann Viswanathan";
+                    break;
+                case "shahina":
+                    document.getElementById("studentName").innerHTML = "Shohinabonu Shamshodova";
+                    break;
+                case "fionn":
+                    document.getElementById("studentName").innerHTML = "Fionn Camacho Lenihan";
+                    break;
+                case "shaurya":
+                    document.getElementById("studentName").innerHTML = "Shaurya Varma";
+                    break;
+                case "nalin":
+                    document.getElementById("studentName").innerHTML = "Nalin Verma";
+                    break;
+                case "yuxin":
+                    document.getElementById("studentName").innerHTML = "Yuxin Wan";
+              }
+            }
+            </script>
     </head>
 
     <body>
@@ -32,51 +65,50 @@
                     <p>We are a team of 3rd and 2nd Year Computer Science students at Trinity College Dublin</p>
                     </div>
                     <div class="namecloud">
-                        <div id="rehann" class="year2">
-                            <h2>Rehann</h2>
+                        <div class="year2">
+                            <h2 id="rehann" onclick="nameClick(this.id)">Rehann</h2>
                         </div>
-                        <div id="stephen" class="year3">
-                            <h2>Stephen</h2>
+                        <div class="year3">
+                            <h2 id="stephen" onclick="nameClick(this.id)">Stephen</h2>
                         </div>
-                        <div id="alexander" class="year3">
-                            <h2>Alexander</h2>
+                        <div class="year3">
+                            <h2 id="alexander" onclick="nameClick(this.id)">Alexander</h2>
                         </div>
-                        <div id="ali" class="year3">
-                            <h2>Ali</h2>
+                        <div class="year3">
+                            <h2 id="ali" onclick="nameClick(this.id)">Ali</h2>
                         </div>
-                        <div id="kate" class="year2">
-                            <h2>Kate</h2>
+                        <div class="year2">
+                            <h2 id="kate" onclick="nameClick(this.id)">Kate</h2>
                         </div>
-                        <div id="shahina" class="year3">
-                            <h2>Shahina</h2>
+                        <div class="year3">
+                            <h2 id="shahina" onclick="nameClick(this.id)">Shahina</h2>
                         </div>
-                        <div id="fionn" class="year2">
-                            <h2>Fionn</h2>
+                        <div class="year2">
+                            <h2 id="fionn" onclick="nameClick(this.id)">Fionn</h2>
                         </div>
-                        <div id="shaurya" class="year2">
-                            <h2>Shaurya<h2>
+                        <div class="year2">
+                            <h2 id="shaurya" onclick="nameClick(this.id)">Shaurya<h2>
                         </div>
-                        <div id="nalin" class="year2">
-                            <h2>Nalin</h2>
+                        <div class="year2">
+                            <h2 id="nalin" onclick="nameClick(this.id)">Nalin</h2>
                         </div>
-                       
-                        <div id="yuxin" class="year2">
-                            <h2>Yuxin</h2>
+                        <div class="year2">
+                            <h2 id="yuxin" onclick="nameClick(this.id)">Yuxin</h2>
                         </div>
                     </div>
                 </section>
                 <aside>
-                    <div id="name">
-                        <h2>Name:</h2>
+                    <div>
+                        <h2>Name:<p id="studentName"></p></h2>
                     </div>
-                    <div id="experience">
-                        <h2>Experience:</h2>
+                    <div>
+                        <h2>Experience:<p id="experience"></p></h2>
                     </div>
-                    <div id="hobbies">
-                        <h2>Hobbies:</h2>
+                    <div>
+                        <h2>Hobbies:<p id="hobbies"></p></h2>
                     </div>
-                    <div id="motto">
-                        <h2>Motto:</h2>
+                    <div>
+                        <h2>Motto:<p id="motto"></p></h2>
                     </div>
                 </aside>
             </main>
@@ -84,6 +116,6 @@
             <!--this is where original code ends-->
         </div>
         
-
+        
     </body>
 </html>
