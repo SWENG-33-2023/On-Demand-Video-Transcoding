@@ -17,6 +17,7 @@
                     contributions = "Back End";
                     hobbies = "anime, table tennis";
                     motto = "Seek Discomfort";
+                    image = "images/kittins/rehann.jpeg";
                     break;
                 case "stephen":
                     name = "Stephen Day";
@@ -25,6 +26,7 @@
                     contributions.innerHTML = "";
                     hobbies = "Basketball, TV";
                     motto = "Hurray";
+                    image = "images/kittins/stephen.jpeg";
                     break;
                 case "alexander":
                     name = "Alexander Sepelenco";
@@ -33,6 +35,7 @@
                     contributions = "Team leader, organization";
                     hobbies = "Coding";
                     motto = "ShutterStock stocks  y|_/^";
+                    image = "images/kittins/alex.jpeg";
                     break;
                 case "ali":
                     name = "Al-Ani Ali";
@@ -41,6 +44,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/ali.jpeg";
                     break;
                 case "kate":
                     name = "Kate O'Neill";
@@ -49,6 +53,7 @@
                     contributions = "TBD";
                     hobbies = "knitting";
                     motto = "Real eyes, realise, real lies.";
+                    image = "images/kittins/kate.jpeg";
                     break;
                 case "shahina":
                     name = "Shohinabonu Shamshodova";
@@ -57,6 +62,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/shahina.jpeg";
                     break;
                 case "fionn":
                     name = "Fionn Camacho Lenihan";
@@ -65,6 +71,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/fionn.jpeg";
                     break;
                 case "shaurya":
                     name = "Shaurya Varma";
@@ -73,6 +80,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/shaurya.jpeg";
                     break;
                 case "nalin":
                     name = "Nalin Verma";
@@ -81,6 +89,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/nalin.jpeg";
                     break;
                 case "yuxin":
                     name = "Yuxin Wan";
@@ -89,6 +98,7 @@
                     contributions = "";
                     hobbies = "";
                     motto = "";
+                    image = "images/kittins/yuxin.jpeg";
               }
             document.getElementById("name").innerHTML = "Name: " + name;
             document.getElementById("year").innerHTML = "Year: " + year;
@@ -96,6 +106,7 @@
             document.getElementById("contributions").innerHTML = "Main contributions: " + contributions;
             document.getElementById("hobbies").innerHTML = "Hobbies: " + hobbies;
             document.getElementById("motto").innerHTML = "Motto: " + motto;
+            document.getElementById("bigphoto").src = image;
             }
             </script>
     </head>
@@ -121,39 +132,50 @@
                     <p>We are a team of 3rd and 2nd Year Computer Science students at Trinity College Dublin</p>
                     </div>
                     <div class="namecloud">
-                        <div class="year2">
-                            <h2 id="rehann" onclick="nameClick(this.id)">Rehann</h2>
+                        <div id="rehann" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/rehann.jpeg"></figure>
+                            <h2>Rehann</h2>
                         </div>
-                        <div class="year3">
-                            <h2 id="stephen" onclick="nameClick(this.id)">Stephen</h2>
+                        <div id="stephen" onclick="nameClick(this.id)">
+                            <img class="headshot" src="images/kittins/stephen.jpeg">
+                            <h2>Stephen</h2>
                         </div>
-                        <div class="year3">
-                            <h2 id="alexander" onclick="nameClick(this.id)">Alexander</h2>
+                        <div id="alexander" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/alex.jpeg"></figure>
+                            <h2>Alex</h2>
                         </div>
-                        <div class="year3">
-                            <h2 id="ali" onclick="nameClick(this.id)">Ali</h2>
+                        <div id="ali" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/ali.jpeg"></figure>
+                            <h2>Ali</h2>
                         </div>
-                        <div class="year2">
-                            <h2 id="kate" onclick="nameClick(this.id)">Kate</h2>
+                        <div id="kate" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/kate.jpeg"></figure>
+                            <h2>Kate</h2>
                         </div>
-                        <div class="year3">
-                            <h2 id="shahina" onclick="nameClick(this.id)">Shahina</h2>
+                        <div id="shahina" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/shahina.jpeg"></figure>
+                            <h2>Shahina</h2>
                         </div>
-                        <div class="year2">
-                            <h2 id="fionn" onclick="nameClick(this.id)">Fionn</h2>
+                        <div id="fionn" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/fionn.jpeg"></figure>
+                            <h2>Fionn</h2>
                         </div>
-                        <div class="year2">
-                            <h2 id="shaurya" onclick="nameClick(this.id)">Shaurya<h2>
+                        <div id="shaurya" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/shaurya.jpeg"></figure>
+                            <h2>Shaurya<h2>
                         </div>
-                        <div class="year2">
-                            <h2 id="nalin" onclick="nameClick(this.id)">Nalin</h2>
+                        <div id="nalin" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/nalin.jpeg"></figure>
+                            <h2>Nalin</h2>
                         </div>
-                        <div class="year2">
-                            <h2 id="yuxin" onclick="nameClick(this.id)">Yuxin</h2>
+                        <div  id="yuxin" onclick="nameClick(this.id)">
+                            <figure><img class="headshot" src="images/kittins/yuxin.jpeg"></figure>
+                            <h2>Yuxin</h2>
                         </div>
                     </div>
                 </section>
                 <aside>
+                    <figure><img id="bigphoto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="></figure>
                     <div>
                         <h2 id="name"></h2>
                     </div>
