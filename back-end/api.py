@@ -43,10 +43,10 @@ class transcoder(Resource):
             file_media = main_cursor.fetchone()
 
             # transcodes video
-            os.system(  "ffmpeg -i " + __location__ + "\\assets\\" + args['mediaName'] + 
+            os.system(  "ffmpeg -i " + __location__ + "/assets/" + args['mediaName'] + 
                         " -vf scale=" + args['mediaScale'] +
                         " -c:v " + args['mediaEncoding'] + " -preset veryslow"  +
-                        " " + __location__ + "\\" + args['mediaNameOutput'] 
+                        " ../front-end/output-videos/" + args['mediaNameOutput'] 
             )           
 
             db_connection.close()
