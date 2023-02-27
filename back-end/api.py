@@ -3,8 +3,7 @@ from flask_restful import Resource, Api, reqparse
 import sqlite3
 import base64
 import os
-import io
-import PIL.Image as Image
+import io # delete maybe
 
 app = Flask(__name__)
 api = Api(app)
@@ -21,12 +20,6 @@ class transcoder(Resource):
 
         args = parser.parse_args()
 
-        
-
-        # to be completed: 
-        ## store images on database, 
-        ## have image be stored after transcoding, 
-        ## send image in return statement as BLOB.
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
 
@@ -45,6 +38,7 @@ class transcoder(Resource):
             # save as image temporarily under the same name
             # with open(__location__ + "/" + args['mediaName'], 'wb') as media:
             # save image by decoding BLOB, by finding image in the same row as the file_name
+            # below is the file_path
             file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
             file_media = main_cursor.fetchone()
 
@@ -56,10 +50,11 @@ class transcoder(Resource):
             )           
 
             db_connection.close()
-            return convertToBinaryData(__location__ + "\\transcoded-assets\\" + args['mediaName'])
+            # return convertToBinaryData(__location__ + "\\transcoded-assets\\" + args['mediaName'])
+            return "Video Transcoded!"
         else:
             db_connection.close()
-            return "ERROR: Media   not found."
+            return "ERROR: Media not found."
 
 # API endpoint
 api.add_resource(transcoder, '/transcoder')
