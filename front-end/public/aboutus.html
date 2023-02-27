@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>On Demand Video Transcoding</title>
+        <link rel="stylesheet" href="aboutus.css">
+        <link rel="stylesheet" href="home.css">
+        <script>
+            function nameClick(id) {
+              switch(id) {
+                case "rehann":
+                    name = "Rehann Viswanathan";
+                    year = "2";
+                    course = "ICS";
+                    contributions = "Back End";
+                    hobbies = "anime, table tennis";
+                    motto = "Seek Discomfort";
+                    break;
+                case "stephen":
+                    name = "Stephen Day";
+                    year = "3";
+                    course = "ICS";
+                    contributions.innerHTML = "";
+                    hobbies = "Basketball, TV";
+                    motto = "Hurray";
+                    break;
+                case "alexander":
+                    name = "Alexander Sepelenco";
+                    year = "3";
+                    course = "ICS";
+                    contributions = "Team leader, organization";
+                    hobbies = "Coding";
+                    motto = "ShutterStock stocks  y|_/^";
+                    break;
+                case "ali":
+                    name = "Ali Al-Ani";
+                    year = "3rd Year";
+                    course = "Computer Science and Business";
+                    contributions = "Front-end Lead";
+                    hobbies = "Football, Music";
+                    motto = "You either do it right or you don't do it.";
+                    break;
+                case "kate":
+                    name = "Kate O'Neill";
+                    year = "2nd year";
+                    course = "ICS";
+                    contributions = "TBD";
+                    hobbies = "knitting";
+                    motto = "Real eyes, realise, real lies.";
+                    break;
+                case "shahina":
+                    name = "Shohinabonu Shamshodova";
+                    year = "3rd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
+                    break;
+                case "fionn":
+                    name = "Fionn Camacho Lenihan";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
+                    break;
+                case "shaurya":
+                    name = "Shaurya Varma";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
+                    break;
+                case "nalin":
+                    name = "Nalin Verma";
+                    year = "2nd Year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
+                    break;
+                case "yuxin":
+                    name = "Yuxin Wan";
+                    year = "2nd year";
+                    course = "";
+                    contributions = "";
+                    hobbies = "";
+                    motto = "";
+              }
+            document.getElementById("name").innerHTML = "Name: " + name;
+            document.getElementById("year").innerHTML = "Year: " + year;
+            document.getElementById("course").innerHTML = "Course: " + course;
+            document.getElementById("contributions").innerHTML = "Main contributions: " + contributions;
+            document.getElementById("hobbies").innerHTML = "Hobbies: " + hobbies;
+            document.getElementById("motto").innerHTML = "Motto: " + motto;
+            }
+            </script>
+    </head>
+
+    <body>
+        <div class="hero">
+            <nav>
+                <img src="images/menu.png" class="menu-img">
+                <a href="https://www.shutterstock.com/">
+                <img src="images/logo.png" class="logo-png">
+                </a>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="application.html">Application</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                </ul>
+           
+                
+            </nav>
+             <!--this is where original code begins-->
+            <main> <!--this is a container-->
+                <section> 
+                    <div id="blurb">
+                    <h1>Meet the team</h1>
+                    <p>We are a team of 3rd and 2nd Year Computer Science students at Trinity College Dublin</p>
+                    </div>
+                    <div class="namecloud">
+                        <div class="year2">
+                            <h2 id="rehann" onclick="nameClick(this.id)">Rehann</h2>
+                        </div>
+                        <div class="year3">
+                            <h2 id="stephen" onclick="nameClick(this.id)">Stephen</h2>
+                        </div>
+                        <div class="year3">
+                            <h2 id="alexander" onclick="nameClick(this.id)">Alexander</h2>
+                        </div>
+                        <div class="year3">
+                            <h2 id="ali" onclick="nameClick(this.id)">Ali</h2>
+                        </div>
+                        <div class="year2">
+                            <h2 id="kate" onclick="nameClick(this.id)">Kate</h2>
+                        </div>
+                        <div class="year3">
+                            <h2 id="shahina" onclick="nameClick(this.id)">Shahina</h2>
+                        </div>
+                        <div class="year2">
+                            <h2 id="fionn" onclick="nameClick(this.id)">Fionn</h2>
+                        </div>
+                        <div class="year2">
+                            <h2 id="shaurya" onclick="nameClick(this.id)">Shaurya<h2>
+                        </div>
+                        <div class="year2">
+                            <h2 id="nalin" onclick="nameClick(this.id)">Nalin</h2>
+                        </div>
+                        <div class="year2">
+                            <h2 id="yuxin" onclick="nameClick(this.id)">Yuxin</h2>
+                        </div>
+                    </div>
+                </section>
+                <aside>
+                    <div>
+                        <h2 id="name"></h2>
+                    </div>
+                    <div>
+                        <h2 id="year"></h2>
+                    </div>
+                    <div>
+                        <h2 id="course"></h2>
+                    </div>
+                    <div>
+                        <h2 id="contributions">click on a name to find out more</h2>
+                    </div>
+                    <div>
+                        <h2 id="hobbies"></h2>
+                    </div>
+                    <div>
+                        <h2 id="motto"></h2>
+                    </div>
+                </aside>
+            </main>
+           
+            <!--this is where original code ends-->
+        </div>
+        
+        
+    </body>
+</html>
