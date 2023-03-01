@@ -1,5 +1,5 @@
-# ignore all pychache folder across the repo
-**/__pycache__/ 
+# Ignore __pycache__
+**/__pycache__
 
 # Ignore macOS file structure file
 **/.DS_Store
