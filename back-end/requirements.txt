@@ -1,2 +1,2 @@
-# Insatll flask
+# Install flask
 flask==2.2.3
