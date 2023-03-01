@@ -4,5 +4,7 @@
 # Ignore macOS file structure file
 **/.DS_Store
 
-# Ignore all transcoded videos
-/frontend/output-videos/*
+# Remove all files in output-videos
+front-end/output-videos/*
+# Exclude the removal of .gitkeep in order to commit empty file to git
+!front-end/output-videos/.gitkeep
