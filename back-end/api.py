@@ -32,27 +32,25 @@ class transcoder(Resource):
         file_name = main_cursor.fetchone()
 
         # if the file is found
-        if(file_name[0] == args['mediaName']):
-            # gets the file_path
-            file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
-            file_media = main_cursor.fetchone()
-
-            # transcodes video
-            os.system(  "ffmpeg -i " + __location__ + "/assets/" + args['mediaName'] + 
-                        " -vf scale=" + args['mediaScale'] +
-                        " -c:v " + args['mediaEncoding'] + " -preset veryslow"  +
-                        " ../front-end/output-videos/" + args['mediaNameOutput'] 
-            )           
-
-            #closes database connection
-            db_connection.close()
-
-            # success message if video found
-            return "Video Transcoded!"
-        else:
-            # error message if video found
+        if (file_name[0] != args['mediaName']):
             db_connection.close()
             return "ERROR: Media not found."
+        # else gets the file_path
+        file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
+        file_media = main_cursor.fetchone()
+
+        # transcode video (unless it's a duplicate output filename)
+        os.system(  "ffmpeg -n -i " + __location__ + "/assets/" + args['mediaName'] +
+                    " -vf scale=" + args['mediaScale'] +
+                    " -c:v " + args['mediaEncoding'] + " -preset veryslow"  +
+                    " ../front-end/output-videos/" + args['mediaNameOutput']
+                  )
+
+        #closes database connection
+        db_connection.close()
+
+        # success message if video found
+        return "Video Transcoded!"
 
 # API endpoint
 api.add_resource(transcoder, '/transcoder')

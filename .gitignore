@@ -3,3 +3,6 @@
 
 # Ignore macOS file structure file
 **/.DS_Store
+
+# Ignore all transcoded videos
+/frontend/output-videos/*

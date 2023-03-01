@@ -1,2 +1,4 @@
 # Install flask
 flask==2.2.3
+# Install flask_restful
+Flask-RESTful>0.3.8
