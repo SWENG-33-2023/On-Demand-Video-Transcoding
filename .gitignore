@@ -1,4 +1,5 @@
 # ignore all pychache folder across the repo
 **/__pycache__/ 
-# ignore video directory
-videos/
+
+# Ignore macOS file structure file
+**/.DS_Store
