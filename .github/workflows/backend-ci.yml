@@ -32,6 +32,5 @@ jobs:
         name: Publish github release
         uses: ncipollo/release-action@v1
         with:
-          body: Backend docker image available at https://hub.docker.com/layers/shamshos/python-backend-sweng2023/latest/images/{{ steps.docker_build.outputs.digest }}
-          artifacts: On-Demand-Video-Transcoding/
+          body: Backend docker image available at https://hub.docker.com/layers/shamshos/python-backend-sweng2023/latest/images/${{ steps.docker_build.outputs.digest }}
           tag: pilot
