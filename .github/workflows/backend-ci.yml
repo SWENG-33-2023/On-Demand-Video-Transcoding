@@ -78,7 +78,7 @@ jobs:
         with:
           file: ./back-end/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_REPO_BACKEND}}
+          tags: "${{ steps.version_step.outputs.version}}, ${{ secrets.DOCKERHUB_REPO_BACKEND}}"
           
       - name: Create Release
         id: create_release
