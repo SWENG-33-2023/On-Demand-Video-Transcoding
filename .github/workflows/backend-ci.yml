@@ -3,7 +3,7 @@ name: backendci
 on:
   push:
     branches:
-      - "cdsetup"
+      - "main"
 
 jobs:
   build:
