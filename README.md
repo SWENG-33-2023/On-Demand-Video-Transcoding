@@ -27,7 +27,7 @@ Images are published to: https://hub.docker.com/repository/docker/shamshos/pytho
 3. Install pip, the Python package manager to be able to download dependencies [here][2], and put it in the same folder you downloaded Python in.
 4. In your Command Line Interface(e.g. Bash, CMD, Terminal) input `pip install pip`.
 5. Clone this repository and create your own branch.
-6. In the repository folder, in your CLI of choice input `pip install -r back-end/requirements.txt`. (You should be in the root directory of the Repo)
+6. In the repository folder, in your CLI of choice input `pip install -r requirements.txt`. (You should be in the root directory of the Repo)
 7. Install ffmpeg [here][4], I recommend downloading from the packages and executable files, otherwise you'll have to compile it yourself.
 8. Follow a tutorial on how to install ffmpeg.
 9. Run the Python API by pressing F5.
