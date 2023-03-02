@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       -
         name: Checkout
@@ -28,3 +30,9 @@ jobs:
           file: ./back-end/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_REPO_BACKEND}}
+      -
+        name: Publish github release
+        uses: ncipollo/release-action@v1
+        with:
+          body: Backend docker image available at https://hub.docker.com/layers/shamshos/python-backend-sweng2023/latest/images/${{ steps.docker_build.outputs.digest }}
+          tag: pilot
