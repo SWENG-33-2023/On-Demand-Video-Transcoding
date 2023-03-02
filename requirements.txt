@@ -3,4 +3,4 @@ flask==2.2.3
 # Install flask_restful
 Flask-RESTful>0.3.8
 # Install pytest for unit testing
-pytest=7.2.1
+pytest==7.2.1
