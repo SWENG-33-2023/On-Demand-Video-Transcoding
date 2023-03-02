@@ -71,7 +71,7 @@ jobs:
           user_format_type: "csv"
       -
         name: Print version
-        run: echo ${{ steps.version_step.version}}
+        run: echo ${{ steps.version_step.outputs.version}}
       -
         name: Build and push
         uses: docker/build-push-action@v4
