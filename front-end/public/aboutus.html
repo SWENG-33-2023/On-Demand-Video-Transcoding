@@ -7,6 +7,7 @@
         <title>On Demand Video Transcoding</title>
         <link rel="stylesheet" href="aboutus.css">
         <link rel="stylesheet" href="home.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <script>
             function nameClick(id) {
               switch(id) {
@@ -98,10 +99,10 @@
                 case "yuxin":
                     name = "Yuxin Wan";
                     year = "2nd year";
-                    course = "";
-                    contributions = "";
-                    hobbies = "";
-                    motto = "";
+                    course = "Computer Science";
+                    contributions = "Front-end";
+                    hobbies = "tennis";
+                    motto = "Don't linger like this";
                     image = "images/kittins/yuxin.jpeg";
               }
             document.getElementById("name").innerHTML = "Name: " + name;
@@ -116,7 +117,7 @@
     </head>
 
     <body>
-        <div class="hero">
+        <div class="hero" id="hero" >
             <nav>
                 <img src="images/menu.png" class="menu-img">
                 <a href="https://www.shutterstock.com/">
@@ -137,6 +138,8 @@
                     <h1>Meet the team</h1>
                     <p>We are a team of 3rd and 2nd Year Computer Science students at Trinity College Dublin</p>
                     </div>
+                     <!--add the button of switch the theme mode-->
+                     <i class="bi bi-brightness-high-fill" id = "toggleDark"></i>
                     <div class="namecloud">
                         <div id="rehann" onclick="nameClick(this.id)">
                             <figure><img class="headshot" src="images/kittins/rehann.jpeg"></figure>
@@ -203,8 +206,28 @@
                 </aside>
             </main>
            
-            <!--this is where original code ends-->
+             <!--this is where original code ends-->
         </div>
+
+         <!--function to realise the switch of theme of mode-->
+        <script>
+            const toggle = document.getElementById("toggleDark");
+            const hero = document.querySelector('*');
+            toggle.addEventListener('click', function(){
+            this.classList.toggle('bi-moon');
+            if(this.classList.toggle('bi-brightness-high-fill')){
+                document.getElementById("hero").style.backgroundColor = "#1d2026";
+                document.getElementById("hero").style.color = "white";
+            }
+            else{
+                document.getElementById("hero").style.backgroundColor = "white";
+                document.getElementById("hero").style.color = "black";
+            }
+
+            })
+        </script>
+
+         
         
         
     </body>

@@ -9,6 +9,14 @@ main {
     overflow: auto;
 }
 
+i {
+    font-size: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 80%;
+    left: 80%;
+}
+
 section {
     width: 50%;
     overflow: auto;
@@ -75,3 +83,13 @@ aside img {
     width: 200px;
     height: 200px;
 }
+
+.hero {
+    background: #1d2026;
+    min-height: 100vh;
+    width: 100%;
+    color:#fff;
+    position: relative;
+
+}
+
