@@ -2,52 +2,66 @@
 
 
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>On Demand Video Transcoding</title>
-        <link rel="stylesheet" href="styles.css">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On Demand Video Transcoding</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <div class="hero">
+        <nav>
+            <img src="images/menu.png" class="menu-img">
+            <img src="images/logo.png" class="logo-png">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="">Application</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+            </ul>
+
+
+        </nav>
+
         
-    </head>
-    <body>
-           
+          
+          
 
-                <ul>
-                    <li><a href="default.asp">Home</a></li>
-                    <li><a href="news.asp">News</a></li>
-                    <li><a href="contact.asp">Contact</a></li>
-                    <li><a href="about.asp">About</a></li>
-                  </ul>
+        <div class="form">
 
+            <h1><b> Lets Get Started...</b></h1>
+            <h1><b> Please upload a video below.</b></h1>
+            <form id="upload-form">
+                <input type="file" id="upload" hidden />
+                <label for="upload">Choose File</label>
+                <br/>
+                <button type="submit">Submit</button>
+              </form>
+
+            <br> 
             
+            <h2>Resolutions Avalible:</h2>
+            <select name="resolution" id="res">
+                <option value="select">Select a Resolution</option>
+                <option value="sd">Standard Definition(420p)</option>
+                <option value="hd">High Definition(720p)</option>
+                <option value="fhd">Full High Definition(1080p)</option>
 
+            </select>
 
-        <h1>On Demand Video Transcoding</h1>
-        <p>Upload a video and select downscale resolution.</p>
-    
-        <h3>Videos Available</h3>
-        <ul>
-        <li><a href="url" download>video1-sd.mp4</a></li>
-        <li><a href="url" download>video1-hd.mp4</a></li>
-        <li><a href="url" download>video2-hd.mp4</a></li>
-        <li><a href="url" download>video2-fhd.mp4</a></li>
-        <li><a href="url" download>video2-qhd.mp4</a></li>
-        </ul>
-        <h3>Upload Video to Transcode</h3>
-        <p>Convert to resolution</p>
+            <br>
+            <br>
+                
+            
+            
+            
+        </div>
 
-<form>
-        <input type="radio" id="sd" name="resolution" value="Standard Definition">
-         <label for="sd">Standard Definition</label><br>
-         <input type="radio" id="hd" name="resolution" value="High Definition">
-        <label for="hd">High Definition</label><br>
-         <input type="radio" id="fhd" name="resolution" value="Full High Definition">
-         <label for="fhd">Full High Definition</label><br><br>
-        </form>
+       
+    </div>
+    <script src="test.js"></script>
 
-        <form>
-        <input type="file" id="myFile" name="filename">
-        <br><br>
-        <input type="submit" value="Submit">
-        </form>
-    </body>
+</body>
+
 </html>
