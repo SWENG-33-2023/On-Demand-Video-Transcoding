@@ -35,9 +35,11 @@ class transcoder(Resource):
         if (file_name[0] != args['mediaName']):
             db_connection.close()
             return "ERROR: Media not found."
+        
         # else gets the file_path
-        file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
-        file_media = main_cursor.fetchone()
+        # commented out for testing purposes
+        # file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
+        # file_media = main_cursor.fetchone()
 
         # transcode video (unless it's a duplicate output filename)
         os.system(  "ffmpeg -n -i " + __location__ + "/assets/" + args['mediaName'] +
