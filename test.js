@@ -4,7 +4,7 @@
 document.getElementById('upload-form').addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    // BELOW WORKS, JUST DOESN'T RETURN ERROR I THINK - FIONN
+    // "Check fileInput.files.length, in case the user clicked cancel." maybe a good idea - FionnCL
     if(!validResolution()){
       return console.log("Error: No resolution selected.")
     }
@@ -17,8 +17,13 @@ document.getElementById('upload-form').addEventListener('submit', async function
       return;
     }
   
-    const formData = new FormData();
-    formData.append('file', file);
+    // saw some code saying this is random, I don't believe it but it's random enough for now. - FionnCL
+    // the below assumes that the user uploads a video that doesn't have more or less than 1 period.
+    var formData = new FormData();
+    var fileType = fileInput.files[0].name.toString().split(' ');
+    //var randomFileName = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36) + fileType;
+    var randomFileName = fileType[-1];
+    formData.append('file', file, randomFileName);
   
     // could be a problem if it starts transcoding before its uploaded.
     // may have to wait for upload to be done.
@@ -38,7 +43,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
       });
 
       // after uploading, make api request
-      var mediaName = file.name;
+      var mediaName = randomFileName;
       var mediaScale = getResolution();
       var mediaEncoding = "libx264";
       var mediaNameOutput = mediaName;
@@ -59,7 +64,6 @@ async function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput)
         headers: {
           "Content-Type": "application/json"
         },
-        //body: JSON.stringify(data),
         body: data
     })
     // .then((res) => res.json().then((data) => {

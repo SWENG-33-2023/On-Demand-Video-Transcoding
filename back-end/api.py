@@ -26,7 +26,9 @@ class transcoder(Resource):
         args = parser.parse_args()
 
         # automatically stores the user's video to the database
-        gatherInformationPrompt(args['mediaName'], args['mediaScale'], args['mediaEncoding'], ("./assets/" + args['mediaName']))
+        os.system("ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 ./assets/" + args['mediaName']) # TODO: GET RESOLUTION
+        if not gatherInformationPrompt(args['mediaName'], args['mediaScale'], args['mediaEncoding']):
+            return "Video cannot be added to database."
         
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
@@ -41,11 +43,6 @@ class transcoder(Resource):
 
         # if the file is found
         if(file_name[0] == args['mediaName']):
-            # gets the file_path
-            # don't think we need the two lines below.
-            file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
-            file_media = main_cursor.fetchone()
-
             # transcodes video
             os.system(  "ffmpeg -i " + __location__ + "/assets/" + args['mediaName'] + 
                         " -vf scale=" + args['mediaScale'] +
