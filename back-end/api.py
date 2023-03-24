@@ -3,6 +3,9 @@ from flask_restful import Resource, Api, reqparse
 import sqlite3
 import os
 
+# automatic database insertion file
+from automaticInsertionToDB import gatherInformationPrompt
+
 # creates api app
 app = Flask(__name__)
 api = Api(app)
@@ -20,6 +23,8 @@ class transcoder(Resource):
 
         args = parser.parse_args()
 
+        # gatherInformationPrompt() DO THIS
+        
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
 

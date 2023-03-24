@@ -8,15 +8,9 @@ acceptedCodecs = ["libx264"]
 # Ask to add file, and do so if needed 
 # Ensure file conforms to linux naming convention
 # Below is essentially main
-def gatherInformationPrompt():
+def gatherInformationPrompt(fileName, fileScale, fileEncoding, filePath):
     displayCurrentDatabase("video-database.db")
-    currently_adding = True
-    while(currently_adding):
-        addFilePrompt = str(input("Do you wish to add a file?(y/n) "))
-        if addFilePrompt != "y":
-            break;
-    
-        getInfo()
+    getInfo(fileName, fileScale, fileEncoding, filePath)
 
 # connect to db and add information
 def addToDatabase(db, name, scale, path):
@@ -33,33 +27,25 @@ def addToDatabase(db, name, scale, path):
     conn.close()
 
 
-def getInfo():
+def getInfo(fileName, fileScale, fileEncoding):
     gettingInfo = True
     while (gettingInfo):
-        boolNameTuple = getFileName("What is the name of your file?")
+        boolNameTuple = getFileName(fileName)
 
         if not boolNameTuple[0]: 
             break;
         
-        filePath = "./assets/" + boolNameTuple[1]
-        boolScaleTuple = pickElementFromArray(
-            "What resolution is this media? Accepted resolutions:", 
-            acceptedResolutions, 
-            "Error: Forbidden resolution."
-        )
+        filePath = "./assets/" + boolNameTuple[0]
+        boolScaleTuple = pickElementFromArray(fileScale, acceptedResolutions)
         
         if not boolScaleTuple[0]: 
             break;
         
-        boolCodecTuple = pickElementFromArray(
-            "What encoding is this media in? Accepted codecs:", 
-            acceptedCodecs, 
-            "Error: Forbidden codec."
-            )
+        boolCodecTuple = pickElementFromArray(fileEncoding, acceptedCodecs)
         
         if not boolCodecTuple[0]:
             break;
-        
+
         addToDatabase('video-database.db', boolNameTuple[1], boolScaleTuple[1], filePath)
 
         gettingInfo = False # end while loop
@@ -67,23 +53,20 @@ def getInfo():
 # Generic: Ask to gather information array and
 # if information is not in array error out and return tuple (False,info)
 # If not erroring, return (True,info)
-def pickElementFromArray(question, arr, error_str):
-    print(question)
-    print(arr)
-    info = str(input())
-    if info not in arr:
-        print(error_str)
-        return (False,info)
-    return (True,info)
+def pickElementFromArray(arrayElement, arr):
+    if arrayElement not in arr:
+        print("Error: Invalid entry (" + arrayElement + ")")
+        return (False, arrayElement)
+    return (True, arrayElement)
 
 # Name a file if conforms to linux naming convention
 # Return False if it does not, and True if it does
-def getFileName(question):
-    file_name = str(input(question))
-    addingFile = isForbiddenName(file_name)
+def getFileName(fileName):
+    addingFile = isForbiddenName(fileName)
     if not addingFile:
+        print("Error: Invalid file name.")
         return False
-    return (True, file_name)
+    return (True, fileName)
 
 # Given a Boolean if False print error 
 # return the same Boolean
@@ -117,6 +100,3 @@ def displayCurrentDatabase(db):
 
     conn.commit()
     conn.close()
-
-if __name__ == "__main__":
-    gatherInformationPrompt()
