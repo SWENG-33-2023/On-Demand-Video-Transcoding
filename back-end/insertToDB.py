@@ -107,11 +107,11 @@ def displayCurrentDatabase(db):
 
     # make pretty table of current database
     table = Table(title = db)
-    table.addColumn("file_name", justify="right", style="cyan", no_wrap=True)
-    table.addColumn("file_scale", style="magenta")
-    table.addColumn("file_path", justify="right", style="green")
+    table.add_column("file_name", justify="right", style="cyan", no_wrap=True)
+    table.add_column("file_scale", style="magenta")
+    table.add_column("file_path", justify="right", style="green")
     for row in cursor:
-        table.addRow(row[0], row[1], row[2])
+        table.add_row(row[0], row[1], row[2])
     
     console = Console()
     console.print(table)
