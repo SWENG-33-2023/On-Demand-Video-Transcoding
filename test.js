@@ -1,5 +1,11 @@
+// if submit button is clicked:
+// - event listener is invoked.
+// - user's file is uploaded to disk.
 document.getElementById('upload-form').addEventListener('submit', function (event) {
     event.preventDefault();
+    if(!validResolution()){
+      return "Error: No resolution chosen"
+    }
     const fileInput = document.getElementById('upload');
     const file = fileInput.files[0];
   
@@ -11,6 +17,8 @@ document.getElementById('upload-form').addEventListener('submit', function (even
     const formData = new FormData();
     formData.append('file', file);
   
+    // could be a problem if it starts transcoding before its uploaded.
+    // may have to wait for upload to be done.
     fetch('/upload', {
       method: 'POST',
       body: formData,
@@ -25,11 +33,9 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       .catch((error) => {
         console.error('Error:', error);
       });
+      // after uploading, make api request
+      apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
   });
-  
-
-
-
 
 function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     data = {
@@ -51,4 +57,10 @@ function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     });
 }
 
-
+function validResolution(){
+  var dropdownMenu = document.getElementById("res").value;
+  if(dropdownMenu == "select"){
+    return false;
+  }
+  return true;
+}
