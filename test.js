@@ -1,14 +1,17 @@
 // if submit button is clicked:
 // - event listener is invoked.
 // - user's file is uploaded to disk.
-document.getElementById('upload-form').addEventListener('submit', function (event) {
+document.getElementById('upload-form').addEventListener('submit', async function (event) {
     event.preventDefault();
+
+    // BELOW WORKS, JUST DOESN'T RETURN ERROR I THINK - FIONN
     if(!validResolution()){
-      return "Error: No resolution chosen"
+      return console.log("Error: No resolution selected.")
     }
+
     const fileInput = document.getElementById('upload');
     const file = fileInput.files[0];
-  
+
     if (!file) {
       alert('Please choose a file.');
       return;
@@ -19,7 +22,7 @@ document.getElementById('upload-form').addEventListener('submit', function (even
   
     // could be a problem if it starts transcoding before its uploaded.
     // may have to wait for upload to be done.
-    fetch('/upload', {
+    await fetch('/upload', {
       method: 'POST',
       body: formData,
     })
@@ -33,28 +36,35 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       .catch((error) => {
         console.error('Error:', error);
       });
+
       // after uploading, make api request
+      var mediaName = file.name;
+      var mediaScale = getResolution();
+      var mediaEncoding = "libx264";
+      var mediaNameOutput = mediaName;
+
       apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
   });
 
-function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
-    data = {
-        "mediaName": mediaName,
-        "mediaScale": mediaScale,
-        "mediaEncoding": mediaEncoding,
-        "mediaNameOutput": mediaNameOutput,
+async function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
+    var data = {
+      "mediaName": mediaName,
+      "mediaScale": mediaScale,
+      "mediaEncoding": mediaEncoding,
+      "mediaNameOutput": mediaNameOutput
     }
-    fetch("https://127.0.0.1:4000/transcoder", {
-        method:"POST",
-        header: {
-            "Content-Type": "application/json",
+    await fetch("https://127.0.0.1:4000/transcoder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(data),
-    }).then((res) => res.json().then((data) => {
-        console.log(data);
-    })).catch((error) => {
-        console.error("Error:", error);
-    });
+    })
+    // .then((res) => res.json().then((data) => {
+    //     console.log(data);
+    // })).catch((error) => {
+    //     console.error("Error:", error);
+    // });
 }
 
 function validResolution(){
@@ -63,4 +73,16 @@ function validResolution(){
     return false;
   }
   return true;
+}
+
+function getResolution(){
+  var resolution = document.getElementById("res").value;
+  switch(resolution){
+    case "sd":
+      return "640:480"
+    case "hd":
+      return "1280:720"
+    case "fhd":
+      return "1920:1080"
+  }
 }
