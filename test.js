@@ -53,12 +53,14 @@ async function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput)
       "mediaEncoding": mediaEncoding,
       "mediaNameOutput": mediaNameOutput
     }
-    await fetch("https://127.0.0.1:4000/transcoder", {
+    await fetch("http://127.0.0.1:4000/transcoder", {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        //body: JSON.stringify(data),
+        body: data
     })
     // .then((res) => res.json().then((data) => {
     //     console.log(data);

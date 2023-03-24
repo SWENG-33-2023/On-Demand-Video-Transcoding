@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
 import sqlite3
 import os
@@ -8,6 +9,7 @@ from automaticInsertionToDB import gatherInformationPrompt
 
 # creates api app
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:3000"])
 api = Api(app)
 
 # location of the back-end folder on our machines
@@ -23,7 +25,8 @@ class transcoder(Resource):
 
         args = parser.parse_args()
 
-        # gatherInformationPrompt() DO THIS
+        # automatically stores the user's video to the database
+        gatherInformationPrompt(args['mediaName'], args['mediaScale'], args['mediaEncoding'], ("./assets/" + args['mediaName']))
         
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
@@ -39,6 +42,7 @@ class transcoder(Resource):
         # if the file is found
         if(file_name[0] == args['mediaName']):
             # gets the file_path
+            # don't think we need the two lines below.
             file_media = main_cursor.execute("SELECT file_path FROM files WHERE (file_name='" +  args['mediaName'] + "')")
             file_media = main_cursor.fetchone()
 
