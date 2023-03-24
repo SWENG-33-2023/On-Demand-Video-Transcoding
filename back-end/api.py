@@ -21,12 +21,6 @@ class transcoder(Resource):
 
         args = parser.parse_args()
 
-        
-
-        # to be completed: 
-        ## store images on database, 
-        ## have image be stored after transcoding, 
-        ## send image in return statement as BLOB.
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
 
