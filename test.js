@@ -17,10 +17,22 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       return;
     }
   
-    // saw some code saying this is random, I don't believe it but it's random enough for now. - FionnCL
     // the below assumes that the user uploads a video that doesn't have more or less than 1 period.
+    // the random generation may not work for two files made in the same milisecond due to Date.now().
+    var fileType = (fileInput.files[0].name).toString().split(".");
+    var tempId = Date.now().toString(36) + Math.random().toString(36);
+    var id = "";
+
+    for(var i = 0; i < tempId.length; i++){
+      var character = tempId.charAt(i);
+      if(character != "."){
+        id = id + character;
+      }
+    }
+
+    var fileName =  id + "." + fileType[1];
     var formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file, fileName);
   
     // could be a problem if it starts transcoding before its uploaded.
     // may have to wait for upload to be done.
@@ -40,7 +52,7 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       });
 
       // after uploading, make api request
-      var mediaName = file.name;
+      var mediaName = fileName;
       var mediaScale = getResolution();
       var mediaEncoding = "libx264";
       var mediaNameOutput = mediaName;
@@ -57,17 +69,11 @@ function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     }
     fetch("http://127.0.0.1:4000/transcoder", {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Content-Type": "application/json"
         },
-        body: data
-    })
-    // .then((res) => res.json().then((data) => {
-    //     console.log(data);
-    // })).catch((error) => {
-    //     console.error("Error:", error);
-    // });
+        body: JSON.stringify(data)
+    });
 }
 
 function validResolution(){
