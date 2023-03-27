@@ -5,7 +5,7 @@ import sqlite3
 import os
 
 # automatic database insertion file
-from automaticInsertionToDB import gatherInformationPrompt
+from automaticInsertionToDB import getInfo
 
 # creates api app
 app = Flask(__name__)
@@ -26,8 +26,7 @@ class transcoder(Resource):
         args = parser.parse_args()
 
         # automatically stores the user's video to the database
-        os.system("ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 ./assets/" + args['mediaName']) # TODO: GET RESOLUTION
-        if not gatherInformationPrompt(args['mediaName'], args['mediaScale'], args['mediaEncoding']):
+        if not getInfo(args['mediaName']):
             return "Video cannot be added to database."
         
         db_path = os.path.join(__location__, 'video-database.db')

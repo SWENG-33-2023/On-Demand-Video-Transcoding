@@ -1,6 +1,7 @@
 import sqlite3, re
 from rich.console import Console
 from rich.table import Table
+import subprocess, re
 
 acceptedResolutions = ["640:480", "1280:720","1920:1080","2560:1440","3840:2160"]
 acceptedCodecs = ["libx264"]
@@ -8,42 +9,57 @@ acceptedCodecs = ["libx264"]
 # Ask to add file, and do so if needed 
 # Ensure file conforms to linux naming convention
 # Below is essentially main
-def gatherInformationPrompt(fileName, fileScale, fileEncoding):
-    displayCurrentDatabase("video-database.db")
-    return getInfo(fileName, fileScale, fileEncoding)
-
-def getInfo(fileName, fileScale, fileEncoding):
+def getInfo(fileName):
     boolNameTuple = getFileName(fileName)
 
     if not boolNameTuple[0]: 
         return False;
     
     filePath = "./assets/" + boolNameTuple[1]
-    boolScaleTuple = pickElementFromArray(fileScale, acceptedResolutions)
-    
-    if not boolScaleTuple[0]: 
-        return False;
-    
-    boolCodecTuple = pickElementFromArray(fileEncoding, acceptedCodecs)
-    
-    if not boolCodecTuple[0]:
-        return False;
 
-    addToDatabase('video-database.db', boolNameTuple[1], boolScaleTuple[1], filePath)
+    # NOTE: We don't need this, we automatically get the resolution now.
+    # leaving here just incase.
+    # boolScaleTuple = pickElementFromArray(fileScale, acceptedResolutions)
+    # if not boolScaleTuple[0]: 
+    #     return False;
+    
+    # NOTE: We also are not currently adding the encoder to the database, this will probably change.
+    # boolCodecTuple = pickElementFromArray(fileEncoding, acceptedCodecs)
+    
+    # if not boolCodecTuple[0]:
+    #     return False;
+
+    addToDatabase('video-database.db', boolNameTuple[1], filePath)
+    displayCurrentDatabase("video-database.db")
     return True
 
 # connect to db and add information
-def addToDatabase(db, name, scale, path):
+def addToDatabase(db, name, path):
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
     db_query = """INSERT INTO files (file_name, file_scale, file_path) VALUES (?, ?, ?)"""
-    db_tuple = (name, scale, path)
+    db_tuple = (name, getResolution(name), path)
 
     cursor.execute(db_query, db_tuple) # str converts bytes to string
 
     conn.commit()
     conn.close()
+
+def getResolution(name):
+    getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", "./assets/" + name]
+    ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ffprobeResult, ffprobeError = ffprobeProcess.communicate()
+    print(ffprobeResult)
+    if ffprobeError:
+        print(ffprobeError)
+        return "Error: Could not find resolution"
+    
+    ffprobeResultString = ffprobeResult.decode("utf-8")
+    dimensions = ffprobeResultString.split("x")
+    return (dimensions[0] + ":" + dimensions[1])
+
+    
 
 # Generic: Ask to gather information array and
 # if information is not in array error out and return tuple (False,info)
