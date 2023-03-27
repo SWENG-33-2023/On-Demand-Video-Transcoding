@@ -82,7 +82,7 @@ def getFileName(fileName):
 # return the same Boolean
 # I may have messed this up - FionnCL
 def isForbiddenName(file_name):
-    search = re.search("[/><|:&] ", file_name) 
+    search = re.search("[/><|:& ]", file_name) 
     if search != None:
         print(  "Error: Inputted a character" +
                 "that does not conform to linux" +
