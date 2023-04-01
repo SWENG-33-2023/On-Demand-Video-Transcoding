@@ -1,7 +1,7 @@
 import sqlite3, re
 from rich.console import Console
 from rich.table import Table
-import subprocess, re
+import subprocess, re, os
 
 acceptedResolutions = ["640:480", "1280:720","1920:1080","2560:1440","3840:2160"]
 acceptedCodecs = ["libx264"]
@@ -9,27 +9,20 @@ acceptedCodecs = ["libx264"]
 # Ask to add file, and do so if needed 
 # Ensure file conforms to linux naming convention
 # Below is essentially main
-def getInfo(fileName):
-    boolNameTuple = getFileName(fileName)
+def getInfo(fileName, fileFolder):
+    if fileFolder == "assets":
+        boolNameTuple = getFileName(fileName)
+    else:
+        boolNameTuple = getFileName("TRANSCODED" + fileName)
 
     if not boolNameTuple[0]: 
         return False;
-    
-    filePath = "./assets/" + boolNameTuple[1]
 
-    # NOTE: We don't need this, we automatically get the resolution now.
-    # leaving here just incase.
-    # boolScaleTuple = pickElementFromArray(fileScale, acceptedResolutions)
-    # if not boolScaleTuple[0]: 
-    #     return False;
-    
-    # NOTE: We also are not currently adding the encoder to the database, this will probably change.
-    # boolCodecTuple = pickElementFromArray(fileEncoding, acceptedCodecs)
-    
-    # if not boolCodecTuple[0]:
-    #     return False;
+    if fileFolder == "assets":
+        addToDatabase('video-database.db', boolNameTuple[1], fileFolder)
+    else: 
+        addToDatabase('video-database.db', boolNameTuple[1], fileFolder)
 
-    addToDatabase('video-database.db', boolNameTuple[1], filePath)
     displayCurrentDatabase("video-database.db")
     return True
 
@@ -39,36 +32,41 @@ def addToDatabase(db, name, path):
     cursor = conn.cursor()
 
     db_query = """INSERT INTO files (file_name, file_scale, file_path) VALUES (?, ?, ?)"""
-    db_tuple = (name, getResolution(name), path)
+    db_tuple = (name, getResolution(name, path), path)
 
     cursor.execute(db_query, db_tuple) # str converts bytes to string
 
     conn.commit()
     conn.close()
 
-def getResolution(name):
-    getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", "./assets/" + name]
-    ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    ffprobeResult, ffprobeError = ffprobeProcess.communicate()
-    print(ffprobeResult)
-    if ffprobeError:
-        print(ffprobeError)
-        return "Error: Could not find resolution"
-    
-    ffprobeResultString = ffprobeResult.decode("utf-8")
-    dimensions = ffprobeResultString.split("x")
-    return (dimensions[0] + ":" + dimensions[1])
+def getResolution(name, fileFolder):
+    if fileFolder == "assets":
+        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", "./assets/" + name]
+        ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ffprobeResult, ffprobeError = ffprobeProcess.communicate()
 
-    
+        if ffprobeError:
+            print(ffprobeError)
+            return "Error: Could not find resolution"
+        
+        ffprobeResultString = ffprobeResult.decode("utf-8")
+        dimensions = ffprobeResultString.split("x")
+        return (dimensions[0] + ":" + dimensions[1])
+    else:
+        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+        parentDir = os.path.abspath(os.path.join(__location__, os.pardir))
+        print(parentDir)
+        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", parentDir + "/front-end/output-videos/" + name]
+        ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        ffprobeResult, ffprobeError = ffprobeProcess.communicate()
 
-# Generic: Ask to gather information array and
-# if information is not in array error out and return tuple (False,info)
-# If not erroring, return (True,info)
-def pickElementFromArray(arrayElement, arr):
-    if arrayElement not in arr:
-        print("Error: Invalid entry (" + arrayElement + ")")
-        return (False, arrayElement)
-    return (True, arrayElement)
+        if ffprobeError:
+            print(ffprobeError)
+            return "Error: Could not find resolution"
+        
+        ffprobeResultString = ffprobeResult.decode("utf-8")
+        dimensions = ffprobeResultString.split("x")
+        return (dimensions[0] + ":" + dimensions[1])
 
 # Name a file if conforms to linux naming convention
 # Return False if it does not, and True if it does

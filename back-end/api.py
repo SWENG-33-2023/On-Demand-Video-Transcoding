@@ -26,7 +26,7 @@ class transcoder(Resource):
         args = parser.parse_args()
 
         # automatically stores the user's video to the database
-        if not getInfo(args['mediaName']):
+        if not getInfo(args['mediaName'], "assets"):
             return "Video cannot be added to database."
         
         db_path = os.path.join(__location__, 'video-database.db')
@@ -46,11 +46,13 @@ class transcoder(Resource):
             os.system(  "ffmpeg -i " + __location__ + "/assets/" + args['mediaName'] + 
                         " -vf scale=" + args['mediaScale'] +
                         " -c:v " + args['mediaEncoding'] + " -preset veryslow"  +
-                        " ../front-end/output-videos/" + args['mediaNameOutput'] 
-            )           
+                        " ../front-end/output-videos/" + "TRANSCODED" + args['mediaNameOutput'])           
 
             #closes database connection
             db_connection.close()
+
+            # adds transcoded file to db
+            getInfo(args['mediaName'], "output-videos")
 
             # success message if video found
             return "Video Transcoded!"
