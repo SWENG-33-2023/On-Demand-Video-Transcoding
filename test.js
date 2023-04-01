@@ -16,7 +16,7 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       alert('Please choose a file.');
       return;
     }
-  
+    
     // the below assumes that the user uploads a video that doesn't have more or less than 1 period.
     // the random generation may not work for two files made in the same milisecond due to Date.now().
     var fileType = (fileInput.files[0].name).toString().split(".");
@@ -50,15 +50,20 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       .catch((error) => {
         console.error('Error:', error);
       });
-
-      // after uploading, make api request
-      var mediaName = fileName;
-      var mediaScale = getResolution();
-      var mediaEncoding = "libx264";
-      var mediaNameOutput = mediaName;
-
-      apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
   });
+
+document.getElementById('transcode-form').addEventListener('submit', function (event) {
+  event.preventDefault();
+  // after uploading, make api request
+  // FOR FRONT END-PPL: "fileName" SHOULD BE GOTTEN BY CHOOSING A VIDEO, AND GETTING IT'S NAME
+  // LEAVE THE OUTPUTNAME = to MEDIANAME
+  var mediaName = fileName;
+  var mediaScale = getResolution();
+  var mediaEncoding = "libx264";
+  var mediaNameOutput = mediaName;
+
+  apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
+});
 
 function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     var data = {
