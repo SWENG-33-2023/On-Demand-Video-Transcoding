@@ -15,6 +15,7 @@ def add_table_to_db(db):
                     file_path text NOT NULL
     )""")
 
+    cursor.close()
     conn.commit()
     conn.close()
 
