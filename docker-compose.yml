@@ -4,17 +4,17 @@ services:
     container_name: back-end
     build: back-end
     volumes:
-      - assets:/frontend/output-videos
+      - assets:/front-end/assets
     ports:
       - "4000:4000"
   redis:
     image: "redis:alpine"
   front-end:
     container_name: front-end
-    build: frontend
+    build: front-end
     volumes: 
-      - assets:/frontend/output-videos
-    port:
-      - "4000:4000"
+      - assets:/front-end/output-videos
+    ports:
+      - "3000:3000"
 volumes:
   assets:
