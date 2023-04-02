@@ -36,6 +36,7 @@ def addToDatabase(db, name, path):
 
     cursor.execute(db_query, db_tuple) # str converts bytes to string
 
+    cursor.close()
     conn.commit()
     conn.close()
 
@@ -108,5 +109,6 @@ def displayCurrentDatabase(db):
     console = Console()
     console.print(table)
 
+    cursor.close()
     conn.commit()
     conn.close()

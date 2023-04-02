@@ -1,54 +1,29 @@
-import './App.css';
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const app = express();
+const port = 3000;
 
-function App() {
-  let displayImageCheck = false;
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = path.join(__dirname, 'back-end/assets');
+    console.log('Upload Path:', uploadPath);
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-  //returns URL to display image
-  function transcodeImage(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
-    let imageBLOB;
-    fetch('http://127.0.0.1:4000/transcoder', {
-      method: 'POST',
-      body: JSON.stringify({
-        "mediaName": mediaName,
-        "mediaScale": mediaScale,
-        "mediaEncoding": mediaEncoding,
-        "mediaNameOutput": mediaNameOutput,
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((res) => res.json())
-    .then((blob) => {
-      let binaryData = [];
-      binaryData.push(blob)
-      imageBLOB = new Blob(binaryData);
-    }).catch((err) =>{
-      console.log(err.message);
-    });
+const upload = multer({ storage: storage });
 
-    return URL.createObjectURL(imageBLOB);
-  }
+app.use(express.static(__dirname));
 
-  function imageShown(){
-    console.log("WORKS!")
-    displayImageCheck = true;
-  }
+app.post('/upload', upload.single('file'), (req, res) => {
+  console.log('File uploaded:', req.file);
+  res.sendStatus(200);
+});
 
-  function displayImage(condition){
-    if(!condition){
-      return <h1>Error: Image not found!</h1>
-    }
-    else {
-      return  <img src={transcodeImage("house.jpg", "640:480", "H264", "house-downscaled.jpg")} alt="The transcoded result."/>
-    }
-  }
-
-  return (
-    <div className="App">
-      <button className="transcode-button" onClick={imageShown()}>Transcode Image</button>
-      {displayImage(displayImageCheck)}
-    </div>
-  );
-}
-
-export default App;
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
