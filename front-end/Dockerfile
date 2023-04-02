@@ -1,7 +1,7 @@
 FROM node:19
 
 # Workdir
-WORKDIR /src
+#WORKDIR /web
 
 # Copy to directory of src
 COPY . .

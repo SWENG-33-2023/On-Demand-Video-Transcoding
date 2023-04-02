@@ -1,10 +1,10 @@
-version: "3.9"
+version: "3"
 services:
   back-end:
     container_name: back-end
     build: back-end
     volumes:
-      - assets:/front-end/assets
+      - assets:/back-end/assets
     ports:
       - "4000:4000"
   redis:
@@ -14,6 +14,7 @@ services:
     build: front-end
     volumes: 
       - assets:/front-end/output-videos
+      - ./back-end/assets:/back-end/assets
     ports:
       - "3000:3000"
 volumes:
