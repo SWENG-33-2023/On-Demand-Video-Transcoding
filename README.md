@@ -32,6 +32,10 @@ Images are published to: https://hub.docker.com/repository/docker/shamshos/pytho
 8. Follow a tutorial on how to install ffmpeg.
 9. Run the Python API by pressing F5.
 
+## Docker-Compose
+1. Ensure you have both docker and docker compose installed
+1. Create a network called transcoding using `docker network create transcoding`
+
 ## Contributors
 
 * Third Years

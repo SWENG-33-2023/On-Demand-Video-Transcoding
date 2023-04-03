@@ -5,17 +5,19 @@ services:
     build: back-end
     volumes:
       - assets:/back-end/assets
+      - output:/front-end/output-videos
     ports:
-      - "4000:4000"
+      - "127.0.0.1:5000:5000"
   redis:
     image: "redis:alpine"
   front-end:
     container_name: front-end
     build: front-end
     volumes: 
-      - assets:/front-end/output-videos
-      - ./back-end/assets:/back-end/assets
+      - assets:/back-end/assets
+      - output:/front-end/output-videos
     ports:
       - "3000:3000"
 volumes:
   assets:
+  output:

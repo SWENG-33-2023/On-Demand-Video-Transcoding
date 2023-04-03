@@ -75,15 +75,16 @@ function transcode(){
 
 function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     var data = {
-      "mediaName": mediaName,
-      "mediaScale": mediaScale,
-      "mediaEncoding": mediaEncoding,
-      "mediaNameOutput": mediaNameOutput
+        "mediaName": mediaName,
+        "mediaScale": mediaScale,
+        "mediaEncoding": mediaEncoding,
+        "mediaNameOutput": mediaNameOutput
     }
-    fetch("http://127.0.0.1:4000/transcoder", {
+
+    fetch("http://localhost:5000/transcoder", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
     });
