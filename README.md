@@ -34,7 +34,7 @@ Images are published to: https://hub.docker.com/repository/docker/shamshos/pytho
 
 ## Docker-Compose
 1. Ensure you have both docker and docker compose installed
-1. Create a network called transcoding using `docker network create transcoding`
+2. Run the script, if a lack of permissions run `chmod +x run.sh` in root directory and run the scrip using `./run.sh`
 
 ## Contributors
 
