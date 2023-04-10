@@ -26,7 +26,8 @@
                 <button type="submit">Submit</button>
             </form>
             <h1><b> And choose a video from our assets to transcode...</b></h1>
-            <ul id="video-list"></ul>
+            <select id="video-select"></select>
+
             <form id="transcode-form">
                 <br />
                 <button type="button" onclick="transcode()">Transcode</button>
@@ -39,5 +40,16 @@
         </div>
     </div>
     <script src="test.js"></script>
+    <script>
+        const videoSelect = document.getElementById('video-select');
+        const videos = ['vd1.mp4', 'vd2.mp4', 'vd3.mp4', 'vd4.mp4'];
+        
+        videos.forEach(video => {
+          const optionElement = document.createElement('option');
+          optionElement.value = `back-end/assets/${video}`;
+          optionElement.text = video;
+          videoSelect.appendChild(optionElement);
+        });
+        </script>
 </body>
 </html>
