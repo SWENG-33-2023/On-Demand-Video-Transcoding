@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 # This file is needed, as we cannot commit empty folder in git
 # DO NOT DELETE THIS FILE AS BACKEND REQUIRES THIS FOLDER
+=======
+# Keep files, to save empty directory
+>>>>>>> e9909238fb6681cdd0fb342a0a044f4ee481c8af

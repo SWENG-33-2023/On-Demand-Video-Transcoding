@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  back-end:
+    container_name: back-end
+    build: back-end
+    volumes:
+      - assets:/frontend/output-videos
+    ports:
+      - "4000:4000"
+  redis:
+    image: "redis:alpine"
+  front-end:
+    container_name: front-end
+    build: frontend
+    volumes: 
+      - assets:/frontend/output-videos
+    port:
+      - "4000:4000"
+volumes:
+  assets:
