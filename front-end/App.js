@@ -7,7 +7,7 @@ const port = 3000;
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     //const uploadPath = path.join(__dirname, '../back-end/assets/');
-    const uploadPath = 'back-end/assets/';
+    const uploadPath = 'workdir/back-end/assets/';
     console.log('Upload Path:', uploadPath);
     cb(null, uploadPath);
   },

@@ -4,8 +4,8 @@ services:
     container_name: back-end
     build: back-end
     volumes:
-      - assets:/back-end/assets
-      - output:/front-end/output-videos
+      - assets:/workdir/back-end/assets
+      - output:/workdir/front-end/output-videos
     ports:
       - "127.0.0.1:5000:5000"
   redis:
@@ -14,8 +14,8 @@ services:
     container_name: front-end
     build: front-end
     volumes: 
-      - assets:/back-end/assets
-      - output:/front-end/output-videos
+      - assets:/workdir/back-end/assets
+      - output:/workdir/front-end/output-videos
     ports:
       - "3000:3000"
 volumes:
