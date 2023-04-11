@@ -16,7 +16,7 @@
             <img src="images/menu.png" class="menu-img">
             <a href="https://www.shutterstock.com/">
                 <img src="images/logo.png" class="logo-png">
-                </a>
+            </a>
             <ul>
                 <li><a href="home.html">Home</a></li>
                 <li><a href="application.html">Application</a></li>
@@ -30,26 +30,42 @@
         <div class="form">
             <h1><b> Lets Get Started...</b></h1>
             <h2>Select any video and it's desired downscale resolution:</h2>
-            <button class="button"><a href="">Video 1</a></button>
+            <button class="button"><a href="../../back-end/assets/vd1.mp4">Video 1</a></button>
             <button class="button"><a href="">Video 2</a></button>
             <button class="button"><a href="">Video 3</a></button>
             <button class="button"><a href="">Video 4</a></button>
             <button class="button"><a href="">Video 5</a></button>
+            <source>src = "../../back-end/assets/vd1.mp4" </source>
 
+
+            <video width="320" height="240" controls>
+                <source src="../../back-end/assets/vd1.mp4" type="video/mp4">
+
+
+            </video>
+            <script>
+                async function files() {
+                    const res = await fetch('http://localhost:3000/files');
+                    obj = await res.json();
+                    console.log(obj);
+                    var array =  JSON.parse(obj);
+                    console.log(array);
+                }
+            </script>
 
             <h2>Resolutions:</h2>
-           
+
             <select name="resolution" id="res">
-              <option value="select">Select a Resolution</option>
-              <option value="sd">Standard Definition(420p)</option>
-              <option value="hd">High Definition(720p)</option>
-              <option value="fhd">Full High Definition(1080p)</option>
-           
+                <option value="select">Select a Resolution</option>
+                <option value="sd">Standard Definition(420p)</option>
+                <option value="hd">High Definition(720p)</option>
+                <option value="fhd">Full High Definition(1080p)</option>
+
             </select>
-         
+
         </div>
 
-        
+
 
         <div class="form">
             <input type="file" id="upload" hidden />

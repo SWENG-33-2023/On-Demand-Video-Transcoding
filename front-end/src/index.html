@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>On Demand Video Transcoding</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="hero">
         <nav>
@@ -42,14 +44,68 @@
     <script src="test.js"></script>
     <script>
         const videoSelect = document.getElementById('video-select');
-        const videos = ['vd1.mp4', 'vd2.mp4', 'vd3.mp4', 'vd4.mp4'];
-        
+        //const videos = ['vd1.mp4', 'vd2.mp4', 'vd3.mp4', 'vd4.mp4'];
+
         videos.forEach(video => {
-          const optionElement = document.createElement('option');
-          optionElement.value = `back-end/assets/${video}`;
-          optionElement.text = video;
-          videoSelect.appendChild(optionElement);
+            const optionElement = document.createElement('option');
+            optionElement.value = `back-end/assets/${video}`;
+            optionElement.text = video;
+            videoSelect.appendChild(optionElement);
         });
-        </script>
+    </script>
+
+
+    <script>
+       
+      
+
+        async function files() {
+            const res = await fetch('http://localhost:3000/files');
+            obj = await res.json();
+            console.log(obj.files);
+            const array = obj.files;
+            console.log(array);
+
+            // Select the element where you want to append the list
+            const container = document.querySelector("#upload-container");
+
+            // Create the list element
+            const ul = document.createElement("ul");
+            console.log(ul);
+            console.log(container);
+            // Append the list element to the container
+            container.appendChild(ul);
+
+            // Iterate over the items and create a list item for each one
+            array.forEach((item) => {
+                // Create the list item element
+                const li = document.createElement("li");
+                // Create the download link element
+                // Create the video element
+                const video = document.createElement("video");
+                video.width = 200;
+                video.height = 200;
+                video.controls = true;
+
+                // Create the source element and set its attributes
+                const source = document.createElement("source");
+                source.src = "assets/"+item;
+                source.type = "video/mp4";
+
+                // Append the source element to the video element
+                video.appendChild(source);
+
+                // Append the video element to the list item
+                li.appendChild(video);
+
+                // Append the list item to the list
+                ul.appendChild(li);
+            });
+
+        }
+        files();
+    </script>
+
 </body>
+
 </html>

@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const fs = require('fs');
-
+ let fileList=[];
 
 const { spawn } = require('child_process');
 
@@ -15,18 +15,18 @@ fs.readdir(directoryPath, (err, files) => {
   if (err) {
     console.log('Error getting directory information:', err);
   } else {
-    let fileList= [];
+    //let fileList= [];
     console.log('List of files in directory:');
     files.forEach(file => {
       if(file !=".gitkeep"){
         
         fileList.push(file);
-        videoButtonsHTML += `<button onclick="transcode('${file}')">${file}</button>`;
+        //videoButtonsHTML += `<button onclick="transcode('${file}')">${file}</button>`;
 
         const filePath = path.join(directoryPath, file);
 
         const ffprobeProcess = spawn('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', filePath]);
-
+        
         ffprobeProcess.stdout.on('data', (data) => {
           const [width, height] = data.toString().trim().split(',');
           console.log(`${file}: ${width}x${height}`);
@@ -43,7 +43,9 @@ fs.readdir(directoryPath, (err, files) => {
     app.get('/files', (req, res) => {
       res.json({ files: fileList });
     });
+    
   }
+  
 });
 
 
