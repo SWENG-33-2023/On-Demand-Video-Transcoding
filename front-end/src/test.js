@@ -52,8 +52,8 @@ document.getElementById('upload-form').addEventListener('submit', function (even
       });
   });
 
-function transcode(){
-  var mediaName = "test.mkv";
+function transcode(mediaName){
+  var mediaName = mediaName; 
   var mediaScale = getResolution();
   var mediaEncoding = "libx264";
   var mediaNameOutput = mediaName;
@@ -61,17 +61,22 @@ function transcode(){
   apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
 }
 
-// document.getElementById('transcode-form').addEventListener('submit', function (event) {
-//   // after uploading, make api request
-//   // FOR FRONT END-PPL: "fileName" SHOULD BE GOTTEN BY CHOOSING A VIDEO, AND GETTING IT'S NAME
-//   // LEAVE THE OUTPUTNAME = to MEDIANAME
-//   var mediaName = "test.mkv";
-//   var mediaScale = getResolution();
-//   var mediaEncoding = "libx264";
-//   var mediaNameOutput = mediaName;
+/*
+document.getElementById('transcode-form').addEventListener('submit', function (event) {
+  // after uploading, make api request
+  // FOR FRONT END-PPL: "fileName" SHOULD BE GOTTEN BY CHOOSING A VIDEO, AND GETTING IT'S NAME
+  // LEAVE THE OUTPUTNAME = to MEDIANAME
+  event.preventDefault(); // prevent default form submission behavior
+  var fileInput = document.querySelector('input[name="media-file"]');
+  var mediaName = fileInput.files[0].name;
+  var mediaName = "test.mkv";
+  var mediaScale = getResolution();
+  var mediaEncoding = "libx264";
+  var mediaNameOutput = mediaName;
 
-//   apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
-// });
+  apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
+});
+*/
 
 function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     var data = {

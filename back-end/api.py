@@ -36,23 +36,23 @@ class transcoder(Resource):
         main_cursor = db_connection.cursor()
 
         # searches for requested file
-        file_name = main_cursor.execute("SELECT file_name FROM files WHERE file_name = '" +  args['mediaName'] + "'")
+        file_name = main_cursor.execute("SELECT file_name FROM files WHERE file_name = '" +  args['mediaName']+ "'")
         
         file_name = main_cursor.fetchone()
 
         # if the file is found
         if(file_name[0] == args['mediaName']):
             # transcodes video
-            os.system(  "ffmpeg -i " + __location__ + "/assets/" + args['mediaName'] + 
+            os.system(  "ffmpeg -y -i " + __location__ + "/../front-end/src/assets/" + args['mediaName']+ 
                         " -vf scale=" + args['mediaScale'] +
                         " -c:v " + args['mediaEncoding'] + " -preset veryslow"  +
-                        " ../front-end/output-videos/" + "TRANSCODED" + args['mediaNameOutput'])           
+                        " ../front-end/src/assets/" + "TRANSCODED" + args['mediaNameOutput'])
 
             #closes database connection
             db_connection.close()
 
             # adds transcoded file to db
-            getInfo(args['mediaName'], "output-videos")
+            getInfo(args['mediaName'], "assets")
 
             # success message if video found
             return "Video Transcoded!"

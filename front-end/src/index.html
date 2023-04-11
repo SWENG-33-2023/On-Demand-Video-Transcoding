@@ -28,7 +28,7 @@
             <h1><b> Lets Get Started...</b></h1>
             <h1><b> You can upload a video below...</b></h1>
             <form id="upload-form">
-                <input type="file" id="upload" hidden />
+                <input type="file" id="upload" name="media-file" hidden />
                 <label for="upload">Choose File</label>
                 <br/>
                 <button type="submit">Submit</button>
@@ -37,7 +37,10 @@
             <h1><b> And choose a video from our assets to transcode...</b></h1>
             <form id="transcode-form">
                 <br/>
-                <button type="button" onclick="transcode()">Transcode</button>
+                <select id="video-select">  
+                    <option value="" selected> -- select an option -- </option> 
+                </select>
+                <!--<button type="button" onclick="transcode('test.mkv')">Transcode</button>-->
             </form>
 
             <br> 
@@ -50,6 +53,12 @@
                 <option value="fhd">Full High Definition(1080p)</option>
 
             </select>
+            <div id="upload-container">
+            </div>
+            <ul id="video-list"></ul>
+            <br>
+            <br>
+            </div>
 
             <br>
             <br>
@@ -58,6 +67,82 @@
 
     </div>
     <script src="test.js"></script>
+    <script>
+      async function getVideoFiles() {
+        const res = await fetch('http://localhost:3000/files');
+        const obj = await res.json();
+        const videoSelect = document.getElementById('video-select');
+        videoSelect.selectedIndex = -1;
+        const videoFiles = obj.files;
+        videoFiles.forEach(videoFile => {
+          const optionElement = document.createElement('option');
+          optionElement.value = videoFile;
+          optionElement.text = videoFile;
+          videoSelect.appendChild(optionElement);
+        });
+        videoSelect.addEventListener('change', () => {
+          const selectedVideoFile = videoSelect.value;
+          transcode(selectedVideoFile);
+        });
+      }
+
+      function startTranscode() {
+        if (!selectedVideoFile) {
+            alert('Please select a video file');
+            return;
+        }
+        transcode(selectedVideoFile);
+      }
+
+      getVideoFiles();
+   </script> 
+    <script>
+        async function files() {
+            const res = await fetch('http://localhost:3000/files');
+            obj = await res.json();
+            console.log(obj.files);
+            const array = obj.files;
+            console.log(array);
+
+            // Select the element where you want to append the list
+            const container = document.querySelector("#upload-container");
+
+            // Create the list element
+            const ul = document.createElement("ul");
+            console.log(ul);
+            console.log(container);
+            // Append the list element to the container
+            container.appendChild(ul);
+
+            // Iterate over the items and create a list item for each one
+            array.forEach((item) => {
+                // Create the list item element
+                const li = document.createElement("li");
+                // Create the download link element
+                // Create the video element
+                const video = document.createElement("video");
+                video.width = 200;
+                video.height = 200;
+                video.controls = true;
+
+                // Create the source element and set its attributes
+                const source = document.createElement("source");
+                source.src = "assets/"+item;
+                source.type = "video/mp4";
+
+                // Append the source element to the video element
+                video.appendChild(source);
+
+                // Append the video element to the list item
+                li.appendChild(video);
+
+                // Append the list item to the list
+                ul.appendChild(li);
+            });
+
+        }
+        files();
+    </script>
 
 </body>
 

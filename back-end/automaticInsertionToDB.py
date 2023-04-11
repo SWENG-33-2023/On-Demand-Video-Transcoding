@@ -42,7 +42,7 @@ def addToDatabase(db, name, path):
 
 def getResolution(name, fileFolder):
     if fileFolder == "assets":
-        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", "./assets/" + name]
+        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", "../front-end/src/assets/" + name]
         ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         ffprobeResult, ffprobeError = ffprobeProcess.communicate()
 
@@ -57,7 +57,7 @@ def getResolution(name, fileFolder):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
         parentDir = os.path.abspath(os.path.join(__location__, os.pardir))
         print(parentDir)
-        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", parentDir + "/front-end/output-videos/" + name]
+        getFileInfoCommandArray = ['ffprobe', "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", parentDir + "/front-end/src/assets/" + name]
         ffprobeProcess = subprocess.Popen(getFileInfoCommandArray, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         ffprobeResult, ffprobeError = ffprobeProcess.communicate()
 
