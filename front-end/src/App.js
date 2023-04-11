@@ -4,50 +4,69 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const fs = require('fs');
- let fileList=[];
 
-const { spawn } = require('child_process');
+const chokidar = require('chokidar');
 
-const directoryPath = path.resolve(__dirname, '..', '..', 'back-end', 'assets');
+let fileList = [];
 
-fs.readdir(directoryPath, (err, files) => {
-  let videoButtonsHTML = '';
-  if (err) {
-    console.log('Error getting directory information:', err);
-  } else {
-    //let fileList= [];
-    console.log('List of files in directory:');
-    files.forEach(file => {
-      if(file !=".gitkeep"){
-        
-        fileList.push(file);
-        //videoButtonsHTML += `<button onclick="transcode('${file}')">${file}</button>`;
+const directoryPath = path.resolve(__dirname, 'assets');
 
-        const filePath = path.join(directoryPath, file);
-
-        const ffprobeProcess = spawn('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', filePath]);
-        
-        ffprobeProcess.stdout.on('data', (data) => {
-          const [width, height] = data.toString().trim().split(',');
-          console.log(`${file}: ${width}x${height}`);
-        });
-
-        ffprobeProcess.stderr.on('data', (data) => {
-          console.error(`Error processing file ${file}: ${data}`);
-        });
-      }
-    });
-
-    console.log(fileList);
-
-    app.get('/files', (req, res) => {
-      res.json({ files: fileList });
-    });
-    
+// Watch for changes in the directory and update the file list and endpoint
+chokidar.watch(directoryPath).on('all', (event, filePath) => {
+  if (event === 'add' || event === 'unlink') {
+    updateFileList();
   }
-  
 });
 
+// Update the file list array and endpoint
+function updateFileList() {
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      console.log('Error getting directory information:', err);
+    } else {
+      fileList = files.filter(file => file !== '.gitkeep');
+      console.log(fileList);
+      app.get('/files', (req, res) => {
+        res.json({ files: fileList });
+      });
+    }
+  });
+}
+
+// Initial update of the file list and endpoint
+updateFileList();
+/*
+setInterval(function() { 
+  let fileList=[];
+  const { spawn } = require('child_process');
+  const directoryPath = path.resolve(__dirname, 'assets');
+  fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+      console.log('Error getting directory information:', err);
+    } else {
+      files.forEach(file => {
+        if(file !=".gitkeep"){
+          fileList.push(file);
+          const filePath = path.join(directoryPath, file);
+          const ffprobeProcess = spawn('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', filePath]);
+          ffprobeProcess.stdout.on('data', (data) => {
+            const [width, height] = data.toString().trim().split(',');
+            console.log(`${file}: ${width}x${height}`);
+          });
+          ffprobeProcess.stderr.on('data', (data) => {
+            console.error(`Error processing file ${file}: ${data}`);
+          });
+        }
+      });
+      console.log(fileList);
+      app.get('/files', (req, res) => {
+        res.json({ files: fileList });
+      });
+    }
+  });
+}, 10);
+
+*/
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
