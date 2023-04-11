@@ -1,8 +1,13 @@
 // if submit button is clicked:
 // - event listener is invoked.
 // - user's file is uploaded to disk.
-document.getElementById('upload-form').addEventListener('submit', async function (event) {
+document.getElementById('upload-form').addEventListener('submit', function (event) {
     event.preventDefault();
+
+    // "Check fileInput.files.length, in case the user clicked cancel." maybe a good idea - FionnCL
+    if(!validResolution()){
+      return console.log("Error: No resolution selected.")
+    }
 
     const fileInput = document.getElementById('upload');
     const file = fileInput.files[0];
@@ -31,7 +36,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
   
     // could be a problem if it starts transcoding before its uploaded.
     // may have to wait for upload to be done.
-    await fetch('/upload', {
+    fetch('/upload', {
       method: 'POST',
       body: formData,
     })
@@ -45,16 +50,9 @@ document.getElementById('upload-form').addEventListener('submit', async function
       .catch((error) => {
         console.error('Error:', error);
       });
-
-      addToDatabase(fileName)
   });
 
 function transcode(){
-  // "Check fileInput.files.length, in case the user clicked cancel." maybe a good idea - FionnCL
-  if(!validResolution()){
-    return console.log("Error: No resolution selected.")
-  }
-
   var mediaName = "test.mkv";
   var mediaScale = getResolution();
   var mediaEncoding = "libx264";
@@ -63,18 +61,17 @@ function transcode(){
   apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
 }
 
-function addToDatabase(mediaName){
-  var data = {
-    "mediaName": mediaName,
-  }
-  fetch("http://127.0.0.1:4000/addToDatabase", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-  });
-}
+// document.getElementById('transcode-form').addEventListener('submit', function (event) {
+//   // after uploading, make api request
+//   // FOR FRONT END-PPL: "fileName" SHOULD BE GOTTEN BY CHOOSING A VIDEO, AND GETTING IT'S NAME
+//   // LEAVE THE OUTPUTNAME = to MEDIANAME
+//   var mediaName = "test.mkv";
+//   var mediaScale = getResolution();
+//   var mediaEncoding = "libx264";
+//   var mediaNameOutput = mediaName;
+
+//   apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput);
+// });
 
 function apiRequest(mediaName, mediaScale, mediaEncoding, mediaNameOutput){
     var data = {

@@ -24,6 +24,10 @@ class transcoder(Resource):
         parser.add_argument('mediaNameOutput', required = True)
 
         args = parser.parse_args()
+
+        # automatically stores the user's video to the database
+        if not getInfo(args['mediaName'], "assets"):
+            return "Video cannot be added to database."
         
         db_path = os.path.join(__location__, 'video-database.db')
         db_connection = connection(db_path)
@@ -57,20 +61,8 @@ class transcoder(Resource):
             db_connection.close()
             return "ERROR: Media not found."
 
-class addToDatabase(Resource):
-    def post(self):
-        parser = reqparse.RequestParser() # checks for requirements
-        parser.add_argument('mediaName', required = True)
-        args = parser.parse_args()
-        # automatically stores the user's video to the database
-        if not getInfo(args['mediaName'], "assets"):
-            return "Video cannot be added to database."
-        
-        return "Video added to database."
-        
 # API endpoint
 api.add_resource(transcoder, '/transcoder')
-api.add_resource(addToDatabase, '/addToDatabase')
 
 # db connection 
 # NOTE: Should probably have a try catch statement
