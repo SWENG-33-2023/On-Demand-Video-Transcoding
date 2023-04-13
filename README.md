@@ -8,30 +8,13 @@ Project is from a Trinity Module for third and second years
 We have been tasked with creating an on demand video transcoding application.
 We will be using ReactJS for the front end and a Python API using flask for the majority of the back end.
 
-## Project Initialisation
-
-NOTE: For all installation steps additional steps will probably be required, which google can help with.
-
-## Front End
-
-1. Install NodeJS [here][3], this comes with Node Package manager(NPM).
-2. A ReactJS app should already be created but if you ever want to create your own ReactJS app with "boiler-plate" code input `npx create-react-app my-app` into your console.
-3. If all the dependencies are not installed on your system, type `npm i` into the console while in this directory.
-4. Run the website off your local machine by typing `npm start` into your console.
-
-## Back End
-
-Images are published to: https://hub.docker.com/repository/docker/shamshos/python-backend-sweng2023/general
-
-1. Install sqlite3 to work with the data base [here][1].
-2. Install Python however you want, either on the Microsoft store or online.
-3. Install pip, the Python package manager to be able to download dependencies [here][2], and put it in the same folder you downloaded Python in.
-4. In your Command Line Interface(e.g. Bash, CMD, Terminal) input `pip install pip`.
-5. Clone this repository and create your own branch.
-6. In the repository folder, in your CLI of choice input `pip install -r requirements.txt`. (You should be in the root directory of the Repo)
-7. Install ffmpeg [here][4], I recommend downloading from the packages and executable files, otherwise you'll have to compile it yourself.
-8. Follow a tutorial on how to install ffmpeg.
-9. Run the Python API by pressing F5.
+### Project Installation
+* The simplest way to run the project is to have docker and docker-compose installed in the system and 
+  running the script named `./runDocker.sh` which will install and setup the enviornment for running the application.
+* The programme can also be run locally, this requires installing the libraries manually, which can be found in
+  `back-end/requirement.txt`, `ffmpeg` and `fprobe` manually for the back-end, and `npm ci --omit=dev`. Open two terminals, one for back-end, one
+  for front-end and run the applications, `flask run --host=0.0.0.0 --port=4000`, and for front-end inside the `src/`
+  directory run with `node App.js`.
 
 ### Contributors
 
@@ -47,8 +30,3 @@ Images are published to: https://hub.docker.com/repository/docker/shamshos/pytho
   * Nalin Verma
   * Rehann Viswanathan
   * Yuxin Wan
-
-[1]: https://www.sqlite.org/download.html
-[2]: https://pypi.org/project/pip/#files
-[3]: https://nodejs.org/en/download/
-[4]: https://ffmpeg.org/download.html
