@@ -21,7 +21,7 @@ class TestTranscoder(unittest.TestCase):
         headers = {'Content-Type': 'application/json'}
         response = self.app.post('http://localhost:4000/transcoder', json=payload, headers=headers)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode('utf-8'), '"ERROR: Media not found."\n')
+        self.assertEqual(response.data.decode('utf-8'), '"Video Transcoded!"\n')
 
 if __name__ == '__main__':
     unittest.main()

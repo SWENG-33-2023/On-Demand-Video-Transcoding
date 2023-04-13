@@ -1,6 +1,6 @@
 import unittest
 import json
-from api import app
+from app import app
 
 class TestTranscoder(unittest.TestCase):
 

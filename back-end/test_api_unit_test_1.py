@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from .app import app
+from app import app
 import os
 
 class TestTranscoder(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestTranscoder(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.decode('utf-8'), '"Video Transcoded!"\n')
         print('transcoding status : ',response.data.decode('utf-8'))
-        os.remove('../front-end/src/assets/video_output.mp4')
+        #os.remove('../front-end/src/assets/video_output.mp4')
 
 if __name__ == '__main__':
     unittest.main()
