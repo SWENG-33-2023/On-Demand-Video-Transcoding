@@ -16,7 +16,7 @@ We will be using ReactJS for the front end and a Python API using flask for the 
   for front-end and run the applications, `flask run --host=0.0.0.0 --port=4000`, and for front-end inside the `src/`
   directory run with `node App.js`.
 
-## Contributors
+### Contributors
 
 * Third Years
   * Shohinabonu Shamshodova

@@ -1,3 +1,9 @@
 # Ignore videos
 *.mp4
 *.mkv
+
+# Ignore __pycache__
+**/__pycache__
+
+# Ignore macOS file structure file
+**/.DS_Store
