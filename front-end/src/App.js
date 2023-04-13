@@ -25,7 +25,7 @@ function updateFileList() {
       console.log('Error getting directory information:', err);
     } else {
       fileList = files.filter(file => file !== '.gitkeep');
-      console.log(fileList);
+      //console.log(fileList);
       app.get('/files', (req, res) => {
         res.json({ files: fileList });
       });
