@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from api import app
+from .app import app
 import os
 
 class TestTranscoder(unittest.TestCase):
@@ -15,11 +15,11 @@ class TestTranscoder(unittest.TestCase):
     def test_transcoder(self):
         payload = {'mediaName': 'meerkats.mp4','mediaScale': '1280:720','mediaEncoding': 'h264','mediaNameOutput': 'video_output.mp4'}
         headers = {'Content-Type': 'application/json'}
-        response = self.app.post('http://localhost:5000/transcoder', json=payload, headers=headers)
+        response = self.app.post('http://localhost:4000/transcoder', json=payload, headers=headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.decode('utf-8'), '"Video Transcoded!"\n')
         print('transcoding status : ',response.data.decode('utf-8'))
-        os.remove('../front-end/output-videos/video_output.mp4')
+        os.remove('../front-end/src/assets/video_output.mp4')
 
 if __name__ == '__main__':
     unittest.main()

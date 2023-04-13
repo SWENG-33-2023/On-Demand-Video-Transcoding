@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from api import app
+from app import app
 
 class TestTranscoder(unittest.TestCase):
 
@@ -11,17 +11,16 @@ class TestTranscoder(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_missing_file(self):
+    def test_missing_argument(self):
         payload = {
-            'mediaName': 'invalid.mp4',
-            'mediaScale': '1280:720',
+            'mediaName': 'video.mp4',
             'mediaEncoding': 'h264',
             'mediaNameOutput': 'video_output.mp4'
         }
         headers = {'Content-Type': 'application/json'}
-        response = self.app.post('http://localhost:5000/transcoder', json=payload, headers=headers)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data.decode('utf-8'), '"ERROR: Media not found."\n')
+        response = self.app.post('http://localhost:4000/transcoder', json=payload, headers=headers)
+        self.assertEqual(response.status_code, 400)
+        self.assertTrue(response.data.decode('utf-8'), 'The browser (or proxy) sent a request that this server could not understand.')
 
 if __name__ == '__main__':
     unittest.main()
